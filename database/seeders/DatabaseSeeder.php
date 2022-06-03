@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Sincome;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -20,5 +21,14 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        $this->call([
+            AdminUserSeeder::class,
+            NoteSeeder::class,
+            IncomeDetailSeeder::class,
+            ExpenseDetailSeeder::class,
+            IncomeSeeder::class,
+            ExpenseSeeder::class
+        ]);
     }
 }
