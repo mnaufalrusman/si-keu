@@ -48,7 +48,7 @@ class Expense extends Model
 
     public function weeklyExpense()
     {
-        return Expense::select(DB::raw('sum(count) as jumlah'))
+        return Expense::select(DB::raw('sum(count) as jumlah'),  DB::raw('DATE(created_at) as tanggal'))
             ->groupby('created_at')
             ->whereRaw('DATE(created_at) >= ?', [date('Y-m-d', strtotime('-7 days'))])
             ->orderby('created_at', 'desc')

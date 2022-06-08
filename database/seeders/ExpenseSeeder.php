@@ -17,19 +17,19 @@ class ExpenseSeeder extends Seeder
     {
         $expenses = [
             [
-                'expense_detail_id' => 1,
+                'category_id' => 1,
                 'created_at' => date('Y-m-d', time()),
-                'count' => 25000
+                'count' => 3000000
             ],
             [
-                'expense_detail_id' => 2,
+                'category_id' => 2,
                 'created_at' => date('Y-m-d', time()),
-                'count' => 17000
+                'count' => 1500000
             ],
             [
-                'expense_detail_id' => 1,
+                'category_id' => 1,
                 'created_at' => date('Y-m-d', time()),
-                'count' => 8000
+                'count' => 2000000
             ]
         ];
 

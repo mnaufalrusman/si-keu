@@ -16,6 +16,11 @@ class DashboardController extends Controller
 
         $money = $totalMasuk - $totalKeluar;
 
+        $cities = $income->all();
+
+        $towns = $expense->all();
+        $merged = $cities->merge($towns);
+
 
         return view('dashboard', [
             'title' => 'Dashboard',
@@ -27,7 +32,8 @@ class DashboardController extends Controller
             'sumExpense' => $expense->sumExpense(),
             'dailyExpense' => $expense->dailyExpense(),
             'weeklyExpense' => $expense->weeklyExpense(),
-            'money' => $money
+            'money' => $money,
+            'merged' => $merged
         ]);
     }
 }

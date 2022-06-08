@@ -112,7 +112,9 @@
                             <div class="card-icon">
                                 <i class="far fa-question-circle"></i>
                             </div>
-                            <h4>14</h4>
+                            <h4>
+                                {{ $merged }}
+                            </h4>
                             <div class="card-description">Pesan</div>
                         </div>
                         <div class="card-body p-0">
@@ -164,17 +166,16 @@
             type: 'line',
             data: {
                 labels: [
-                    @foreach ($incomes as $income)
-                        '{{ $income->created_at }}',
+                    @foreach ($merged as $m)
+                        '{{ $m->created_at->format('M d Y') }}',
                     @endforeach
                 ],
                 datasets: [{
                         label: 'Sales',
                         data: [
-                            @foreach ($incomes as $income)
-                                '{{ $income->count }}',
+                            @foreach ($weeklyIncome as $wi)
+                                '{{ $wi->jumlah }}',
                             @endforeach
-
                         ],
                         borderWidth: 2,
                         backgroundColor: 'rgba(63,82,227,.8)',
@@ -187,7 +188,11 @@
                     },
                     {
                         label: 'Budget',
-                        data: [2207, 3403, 2200, 5025, 2302, 4208, 3880, 4880],
+                        data: [
+                            @foreach ($weeklyExpense as $we)
+                                '{{ $we->jumlah }}',
+                            @endforeach
+                        ],
                         borderWidth: 2,
                         backgroundColor: 'rgba(254,86,83,.7)',
                         borderWidth: 0,
@@ -212,7 +217,7 @@
                         },
                         ticks: {
                             beginAtZero: true,
-                            stepSize: 50000,
+                            stepSize: 1000000,
                             callback: function(value, index, values) {
                                 return 'Rp. ' + value;
                             }

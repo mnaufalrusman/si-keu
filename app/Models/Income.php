@@ -54,7 +54,7 @@ class Income extends Model
 
     public function weeklyIncome()
     {
-        return Income::select(DB::raw('sum(count) as jumlah'))
+        return Income::select(DB::raw('sum(count) as jumlah'),  DB::raw('DATE(created_at) as tanggal'))
             ->groupby('created_at')
             ->whereRaw('DATE(created_at) >= ?', [date('Y-m-d', strtotime('-7 days'))])
             ->orderby('created_at', 'desc')
