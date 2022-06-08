@@ -102,7 +102,7 @@
                             <h4>Pendapatan vs Pengeluaran</h4>
                         </div>
                         <div class="card-body">
-                            <canvas id="myChart" height="158"></canvas>
+                            <canvas id="rasyid" height="158"></canvas>
                         </div>
                     </div>
                 </div>
@@ -157,4 +157,75 @@
             </div>
         </section>
     </div>
+    <script src="{{ asset('assets/modules/chart.min.js') }}"></script>
+    <script>
+        var ctx = document.getElementById("rasyid").getContext('2d');
+        var rasyid = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [
+                    @foreach ($incomes as $income)
+                        '{{ $income->created_at }}',
+                    @endforeach
+                ],
+                datasets: [{
+                        label: 'Sales',
+                        data: [
+                            @foreach ($incomes as $income)
+                                '{{ $income->count }}',
+                            @endforeach
+
+                        ],
+                        borderWidth: 2,
+                        backgroundColor: 'rgba(63,82,227,.8)',
+                        borderWidth: 0,
+                        borderColor: 'transparent',
+                        pointBorderWidth: 0,
+                        pointRadius: 3.5,
+                        pointBackgroundColor: 'transparent',
+                        pointHoverBackgroundColor: 'rgba(63,82,227,.8)',
+                    },
+                    {
+                        label: 'Budget',
+                        data: [2207, 3403, 2200, 5025, 2302, 4208, 3880, 4880],
+                        borderWidth: 2,
+                        backgroundColor: 'rgba(254,86,83,.7)',
+                        borderWidth: 0,
+                        borderColor: 'transparent',
+                        pointBorderWidth: 0,
+                        pointRadius: 3.5,
+                        pointBackgroundColor: 'transparent',
+                        pointHoverBackgroundColor: 'rgba(254,86,83,.8)',
+                    }
+                ]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        gridLines: {
+                            // display: false,
+                            drawBorder: false,
+                            color: '#f2f2f2',
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 50000,
+                            callback: function(value, index, values) {
+                                return 'Rp. ' + value;
+                            }
+                        }
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            display: false,
+                            tickMarkLength: 15,
+                        }
+                    }]
+                },
+            }
+        });
+    </script>
 @endsection

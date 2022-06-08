@@ -20,6 +20,7 @@ class DashboardController extends Controller
         return view('dashboard', [
             'title' => 'Dashboard',
             'officer' => $officer,
+            'incomes' => $income->all(),
             'sumIncome' => $income->sumIncome(),
             'dailyIncome' => $income->dailyIncome(),
             'weeklyIncome' => $income->weeklyIncome(),
