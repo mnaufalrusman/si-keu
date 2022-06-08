@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ExpenseRequest;
+use App\Models\Expense;
+use App\Models\ExpenseDetail;
 use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
@@ -11,9 +14,15 @@ class ExpenseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Expense $expense)
     {
-        //
+        return view('expense.index', [
+            'title' => 'Pengeluaran',
+            'expenses' => $expense->all(),
+            'expenseDetails' => ExpenseDetail::all(),
+            'countExpenseDetails' => $expense->countExpenseDetails(),
+            'sumExpense' => $expense->sumExpense()
+        ]);
     }
 
     /**
@@ -32,9 +41,13 @@ class ExpenseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ExpenseRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        Expense::create($validated);
+
+        return redirect('/expense')->with('success', 'Data Pengeluaran berhasil ditamabahkan!');
     }
 
     /**
@@ -54,9 +67,13 @@ class ExpenseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Expense $expense)
     {
-        //
+        return view('expense.edit', [
+            'expense' => $expense,
+            'title' => 'Pengeluaran',
+            'expenseDetails' => ExpenseDetail::all()
+        ]);
     }
 
     /**
@@ -66,9 +83,14 @@ class ExpenseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ExpenseRequest $request, Expense $expense)
     {
-        //
+        $validated = $request->validated();
+
+        Expense::where('id', $expense->id)
+            ->update($validated);
+
+        return redirect('/expense')->with('updated', 'Data Pengeluaran berhasil diedit!');
     }
 
     /**
@@ -77,8 +99,10 @@ class ExpenseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Expense $expense)
     {
-        //
+        Expense::destroy($expense->id);
+
+        return redirect('/expense')->with('deleted', 'Data Pengeluaran berhasil dihapus!');
     }
 }

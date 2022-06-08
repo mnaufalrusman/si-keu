@@ -4,7 +4,7 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Pendapatan</h1>
+                <h1>Pengeluaran</h1>
             </div>
 
             @if (session()->has('success'))
@@ -32,12 +32,12 @@
 
             <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal"><i
                     class="fa fa-plus"></i> Tambah Data
-                Pendapatan</button>
+                Pengeluaran</button>
             <div class="row">
                 <div class="col-7">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Transaksi Masuk</h4>
+                            <h4>Transaksi Keluar</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -52,17 +52,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($incomes as $income)
+                                        @foreach ($expenses as $expense)
                                             <tr>
                                                 <td class="text-center">{{ $loop->iteration }}</td>
                                                 <td class="text-center">Rp.
-                                                    {{ number_format($income->count, 2, ',', '.') }}</td>
-                                                <td class="text-center">{{ $income->incomeDetail->name }}</td>
-                                                <td class="text-center">{{ $income->created_at->format('M d Y') }}</td>
+                                                    {{ number_format($expense->count, 2, ',', '.') }}</td>
+                                                <td class="text-center">{{ $expense->expenseDetail->name }}</td>
+                                                <td class="text-center">{{ $expense->created_at->format('M d Y') }}
+                                                </td>
                                                 <td class="text-center">
-                                                    <a href="/income/{{ $income->id }}/edit" class="btn btn-warning"><i
+                                                    <a href="/expense/{{ $expense->id }}/edit" class="btn btn-warning"><i
                                                             class="fas fa-edit"></i></a>
-                                                    <form action="/income/{{ $income->id }}" method="POST"
+                                                    <form action="/expense/{{ $expense->id }}" method="POST"
                                                         class="d-inline">
                                                         @method('delete')
                                                         @csrf
@@ -89,7 +90,7 @@
                             </div>
                             <h3>
                                 <div class="float-right font-weight-bold badge badge-info">
-                                    Rp. {{ number_format($sumIncome, 2, ',', '.') }}
+                                    Rp. {{ number_format($sumExpense, 2, ',', '.') }}
                                 </div>
                             </h3>
 
@@ -97,40 +98,23 @@
                     </div>
                     <div class="card">
                         <div class="card-header">
-                            <h4>Sumber Pendapatan</h4>
+                            <h4>Sumber Pengeluaran</h4>
                         </div>
-                        {{-- <div class="card-body">
-                            @foreach ($incomeDetails as $incomeDetail)
-                                <div class="mb-4">
-                                    <div class="text-small float-right font-weight-bold text-muted">2,100</div>
-                                    <div class="btn btn-primary font-weight-bold mb-2">{{ $incomeDetail->name }}
-                                        @foreach ($getIncomeDetails as $getIncomeDetail)
-                                            <span class="badge badge-transparent">{{ $getIncomeDetail->total }}</span>
-                                        @endforeach
-
-                                    </div>
-                                    <div class="progress" data-height="3">
-                                        <div class="progress-bar" role="progressbar" data-width="80%" aria-valuenow="80"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            @endforeach
-
-                        </div> --}}
                         <div class="card-body">
-                            @foreach ($countIncomeDetails as $countIncomeDetail)
+                            @foreach ($countExpenseDetails as $countExpenseDetail)
                                 <div class="mb-4">
                                     <div class="float-right font-weight-bold">
-                                        <h5>Rp. {{ number_format($countIncomeDetail->jumlah, 2, ',', '.') }}</h5>
+                                        <h5>Rp. {{ number_format($countExpenseDetail->jumlah, 2, ',', '.') }}</h5>
                                     </div>
                                     <div class="btn btn-info font-weight-bold mb-2">
-                                        {{ $countIncomeDetail->incomeDetail->name }}
-                                        <span class="badge badge-transparent">{{ $countIncomeDetail->total }} Kali</span>
+                                        {{ $countExpenseDetail->expenseDetail->name }}
+                                        <span class="badge badge-transparent">{{ $countExpenseDetail->total }}
+                                            Kali</span>
 
                                     </div>
                                     <div class="progress" data-height="6">
                                         <div class="progress-bar bg-info" role="progressbar"
-                                            data-width="{{ $countIncomeDetail->total }}.%" aria-valuenow="80"
+                                            data-width="{{ $countExpenseDetail->total }}.%" aria-valuenow="80"
                                             aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
@@ -150,7 +134,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="/income" method="POST">
+                        <form action="/expense" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="count">Jumlah</label>
@@ -164,12 +148,12 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="income_detail_id">Sumber</label>
-                                <select class="form-control select2" name="income_detail_id">
-                                    @foreach ($incomeDetails as $incomeDetail)
-                                        <option value="{{ $incomeDetail->id }}"
-                                            {{ old('income_detail_id') == $incomeDetail->id ? 'selected' : '' }}>
-                                            {{ $incomeDetail->name }}
+                                <label for="expense_detail_id">Sumber</label>
+                                <select class="form-control select2" name="expense_detail_id">
+                                    @foreach ($expenseDetails as $expenseDetail)
+                                        <option value="{{ $expenseDetail->id }}"
+                                            {{ old('expense_detail_id') == $expenseDetail->id ? 'selected' : '' }}>
+                                            {{ $expenseDetail->name }}
                                         </option>
                                     @endforeach
                                 </select>

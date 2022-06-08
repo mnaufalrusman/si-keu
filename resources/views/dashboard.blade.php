@@ -9,7 +9,7 @@
                     <div class="card card-statistic-2">
                         <div class="card-stats">
                             <div class="card-header">SISA UANG</div>
-                            <div class="card-body">Rp.17.257.787,00</div>
+                            <div class="card-body">Rp. {{ number_format($money, 2, ',', '.') }}</div>
                         </div>
                         <div class="card-icon shadow-primary bg-primary">
                             <i class="fas fa-users"></i>
@@ -29,16 +29,16 @@
                         <div class="card-header">
                             <h4>Pendapatan</h4>
                             <div class="card-header-action">
-                                <a href="#daily" data-tab="summary-tab" class="btn active">Harian(terakhir)</a>
-                                <a href="#Weekly" data-tab="summary-tab" class="btn">Mingguan</a>
+                                <a href="#dailyIncome" data-tab="income-tab" class="btn active">Harian(terakhir)</a>
+                                <a href="#WeeklyIncome" data-tab="income-tab" class="btn">Mingguan</a>
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="summary">
-                                <div class="active" data-tab-group="summary-tab" id="daily">
+                            <div class="income">
+                                <div class="active" data-tab-group="income-tab" id="dailyIncome">
                                     <h4>Rp. {{ number_format($dailyIncome[0]->jumlah, 2, ',', '.') }}</h4>
                                 </div>
-                                <div class="" data-tab-group="summary-tab" id="Weekly">
+                                <div class="" data-tab-group="income-tab" id="WeeklyIncome">
                                     <h4>Rp. {{ number_format($weeklyIncome->sum('jumlah'), 2, ',', '.') }}</h4>
                                 </div>
                             </div>
@@ -64,17 +64,17 @@
                         <div class="card-header">
                             <h4>Pengeluaran</h4>
                             <div class="card-header-action">
-                                <a href="#daily" data-tab="summary-tab" class="btn active">Harian(terakhir)</a>
-                                <a href="#Weekly" data-tab="summary-tab" class="btn">Mingguan</a>
+                                <a href="#dailyExpense" data-tab="expense-tab" class="btn active">Harian(terakhir)</a>
+                                <a href="#WeeklyExspense" data-tab="expense-tab" class="btn">Mingguan</a>
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="summary">
-                                <div class="active" data-tab-group="summary-tab" id="daily">
-                                    <h4>Rp. {{ number_format($dailyIncome[0]->jumlah, 2, ',', '.') }}</h4>
+                            <div class="expense">
+                                <div class="active" data-tab-group="expense-tab" id="dailyExpense">
+                                    <h4>Rp. {{ number_format($dailyExpense[0]->jumlah, 2, ',', '.') }}</h4>
                                 </div>
-                                <div class="" data-tab-group="summary-tab" id="Weekly">
-                                    <h4>Rp. {{ number_format($weeklyIncome->sum('jumlah'), 2, ',', '.') }}</h4>
+                                <div class="" data-tab-group="expense-tab" id="WeeklyExspense">
+                                    <h4>Rp. {{ number_format($weeklyExpense->sum('jumlah'), 2, ',', '.') }}</h4>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +88,7 @@
                                     <h4>Total Pengeluaran</h4>
                                 </div>
                                 <div class="card-body">
-                                    Rp. {{ number_format($sumIncome, 2, ',', '.') }}
+                                    Rp. {{ number_format($sumExpense, 2, ',', '.') }}
                                 </div>
                             </div>
                         </div>
@@ -99,7 +99,7 @@
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Budget vs Sales</h4>
+                            <h4>Pendapatan vs Pengeluaran</h4>
                         </div>
                         <div class="card-body">
                             <canvas id="myChart" height="158"></canvas>
@@ -113,7 +113,7 @@
                                 <i class="far fa-question-circle"></i>
                             </div>
                             <h4>14</h4>
-                            <div class="card-description">Customers need help</div>
+                            <div class="card-description">Pesan</div>
                         </div>
                         <div class="card-body p-0">
                             <div class="tickets-list">

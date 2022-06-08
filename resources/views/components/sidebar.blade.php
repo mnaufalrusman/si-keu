@@ -17,7 +17,8 @@
                         class="fas fa-fw fa-arrow-up"></i>
                     <span>Pendapatan</span></a></li>
 
-            <li class=""><a class="nav-link" href="#"><i class="fas fa-fw fa-arrow-down"></i>
+            <li class="{{ Request::is('expense*') ? 'active' : '' }}"><a class="nav-link" href="/expense"><i
+                        class="fas fa-fw fa-arrow-down"></i>
                     <span>Pengeluaran</span></a></li>
 
             <li class="menu-header">employee</li>
