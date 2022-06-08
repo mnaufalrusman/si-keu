@@ -28,7 +28,8 @@ class DatabaseSeeder extends Seeder
             IncomeDetailSeeder::class,
             ExpenseDetailSeeder::class,
             IncomeSeeder::class,
-            ExpenseSeeder::class
+            ExpenseSeeder::class,
+            OfficerSeeder::class
         ]);
     }
 }
