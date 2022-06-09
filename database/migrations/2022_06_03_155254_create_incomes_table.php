@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('incomes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained();
+            $table->foreignId('income_detail_id')->constrained();
             $table->integer('count');
             $table->timestamps();
         });

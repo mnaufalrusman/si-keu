@@ -17,17 +17,17 @@ class IncomeSeeder extends Seeder
     {
         $incomes = [
             [
-                'category_id' => 1,
+                'income_detail_id' => 1,
                 'created_at' => date('Y-m-d', time()),
                 'count' => 5000000
             ],
             [
-                'category_id' => 2,
+                'income_detail_id' => 2,
                 'created_at' => date('Y-m-d', time()),
                 'count' => 3000000
             ],
             [
-                'category_id' => 1,
+                'income_detail_id' => 1,
                 'created_at' => date('Y-m-d', time()),
                 'count' => 6500000
             ]

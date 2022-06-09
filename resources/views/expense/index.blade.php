@@ -34,7 +34,7 @@
                     class="fa fa-plus"></i> Tambah Data
                 Pengeluaran</button>
             <div class="row">
-                <div class="col-7">
+                <div class="col-lg-6 col-md-6 col-12">
                     <div class="card">
                         <div class="card-header">
                             <h4>Transaksi Keluar</h4>
@@ -82,7 +82,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5 col-md-5 col-12">
+                <div class="col-lg-6 col-md-6 col-12">
                     <div class="card">
                         <div class="mx-3 my-3 float-left">
                             <div class="">

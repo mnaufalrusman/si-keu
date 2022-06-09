@@ -7,10 +7,19 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12">
                     <div class="card card-statistic-2">
-                        <div class="card-stats">
-                            <div class="card-header">SISA UANG</div>
-                            <div class="card-body">Rp. {{ number_format($money, 2, ',', '.') }}</div>
+                        <div class="card-icon shadow-success bg-success">
+                            <i class="fas fa-dollar-sign"></i>
                         </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Sisa Uang</h4>
+                            </div>
+                            <div class="card-body">
+                                Rp. {{ number_format($money, 2, ',', '.') }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-statistic-2">
                         <div class="card-icon shadow-primary bg-primary">
                             <i class="fas fa-users"></i>
                         </div>
@@ -45,8 +54,8 @@
                         </div>
                         <hr class="mx-3">
                         <div class="card card-statistic-2">
-                            <div class="card-icon shadow-primary bg-primary">
-                                <i class="fas fa-dollar-sign"></i>
+                            <div class="card-icon shadow-info bg-info">
+                                <i class="fas fa-fw fa-arrow-up"></i>
                             </div>
                             <div class="card-wrap">
                                 <div class="card-header">
@@ -80,8 +89,8 @@
                         </div>
                         <hr class="mx-3">
                         <div class="card card-statistic-2">
-                            <div class="card-icon shadow-primary bg-primary">
-                                <i class="fas fa-dollar-sign"></i>
+                            <div class="card-icon shadow-warning bg-warning">
+                                <i class="fas fa-fw fa-arrow-down"></i>
                             </div>
                             <div class="card-wrap">
                                 <div class="card-header">
@@ -99,10 +108,21 @@
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Pendapatan vs Pengeluaran</h4>
+                            <h4>Pendapatan</h4>
+                            <div class="card-header-action">
+                                <a href="#line" data-tab="chart-tab" class="btn active">Line</a>
+                                <a href="#doughnut" data-tab="chart-tab" class="btn">Doughnut</a>
+                            </div>
                         </div>
                         <div class="card-body">
-                            <canvas id="rasyid" height="158"></canvas>
+                            <div class="chart">
+                                <div class="active" data-tab-group="chart-tab" id="line">
+                                    <canvas id="lineChart" height="158"></canvas>
+                                </div>
+                                <div class="" data-tab-group="chart-tab" id="doughnut">
+                                    <canvas id="myChart3"></canvas>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -113,7 +133,6 @@
                                 <i class="far fa-question-circle"></i>
                             </div>
                             <h4>
-                                {{ $merged }}
                             </h4>
                             <div class="card-description">Pesan</div>
                         </div>
@@ -161,24 +180,20 @@
     </div>
     <script src="{{ asset('assets/modules/chart.min.js') }}"></script>
     <script>
-        var ctx = document.getElementById("rasyid").getContext('2d');
-        var rasyid = new Chart(ctx, {
+        var ctx = document.getElementById("lineChart").getContext('2d');
+        var lineChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: [
-                    @foreach ($merged as $m)
-                        '{{ $m->created_at->format('M d Y') }}',
-                    @endforeach
-                ],
+                labels: ["Hari ke-1", "Hari ke-2", "Hari ke-3", "Hari ke-4", "Hari ke-5", "Hari ke-6", "Hari ke-7"],
                 datasets: [{
-                        label: 'Sales',
+                        label: 'Pendapatan',
                         data: [
                             @foreach ($weeklyIncome as $wi)
                                 '{{ $wi->jumlah }}',
                             @endforeach
                         ],
                         borderWidth: 2,
-                        backgroundColor: 'rgba(63,82,227,.8)',
+                        backgroundColor: 'rgba(58,185,245,.8)',
                         borderWidth: 0,
                         borderColor: 'transparent',
                         pointBorderWidth: 0,
@@ -187,14 +202,14 @@
                         pointHoverBackgroundColor: 'rgba(63,82,227,.8)',
                     },
                     {
-                        label: 'Budget',
+                        label: 'Pengeluaran',
                         data: [
                             @foreach ($weeklyExpense as $we)
                                 '{{ $we->jumlah }}',
                             @endforeach
                         ],
                         borderWidth: 2,
-                        backgroundColor: 'rgba(254,86,83,.7)',
+                        backgroundColor: 'rgba(255,164,39,.7)',
                         borderWidth: 0,
                         borderColor: 'transparent',
                         pointBorderWidth: 0,
@@ -229,6 +244,37 @@
                             tickMarkLength: 15,
                         }
                     }]
+                },
+            }
+        });
+
+        var ctx = document.getElementById("myChart3").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: [
+                        '{{ $sumIncome }}',
+                        '{{ $sumExpense }}',
+                        '{{ $money }}',
+                    ],
+                    backgroundColor: [
+                        '#32bef2',
+                        '#ffa11c',
+                        '#64ef7b',
+                    ],
+                    label: 'Dataset 1'
+                }],
+                labels: [
+                    'Pendapatan',
+                    'Pengeluaran',
+                    'Sisa',
+                ],
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'bottom',
                 },
             }
         });

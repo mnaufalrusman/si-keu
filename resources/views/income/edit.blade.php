@@ -25,7 +25,7 @@
                                             value="{{ old('count', $income->count) }}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="income_detail">Sumber</label>
+                                        <label for="income_detail_id">Sumber</label>
                                         <select class="form-control select2" name="income_detail_id">
                                             @foreach ($incomeDetails as $incomeDetail)
                                                 <option value="{{ $incomeDetail->id }}"
