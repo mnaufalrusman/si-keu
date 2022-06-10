@@ -60,7 +60,7 @@
                                                 <td class="text-center">{{ $expense->expenseDetail->name }}</td>
                                                 <td class="text-center">{{ $expense->created_at->format('M d Y') }}
                                                 </td>
-                                                <td class="text-center">
+                                                <td class="text-nowrap bd-highlight">
                                                     <a href="/expense/{{ $expense->id }}/edit" class="btn btn-warning"><i
                                                             class="fas fa-edit"></i></a>
                                                     <form action="/expense/{{ $expense->id }}" method="POST"
@@ -86,7 +86,7 @@
                     <div class="card">
                         <div class="mx-3 my-3 float-left">
                             <div class="">
-                                <h6>Total Pendapatan</h6>
+                                <h6>Total Pengeluaran</h6>
                             </div>
                             <h3>
                                 <div class="float-right font-weight-bold badge badge-info">

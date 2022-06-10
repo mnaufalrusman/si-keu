@@ -4,7 +4,7 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Karyawan</h1>
+                <h1>Catatan</h1>
             </div>
 
             <div class="section-body">
@@ -32,13 +32,13 @@
                 @endif
                 <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal"><i
                         class="fa fa-plus"></i> Tambah Data
-                    Karyawan</button>
+                    Catatan</button>
 
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12 col-md-6 col-lg-6">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Data Karyawan</h4>
+                                <h4>Data Catatan</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -46,27 +46,21 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-center">NO</th>
-                                                <th class="text-center">Name</th>
-                                                <th class="text-center">Posisi</th>
-                                                <th class="text-center">Alamat</th>
-                                                <th class="text-center">Umur</th>
-                                                <th class="text-center">Kontak</th>
+                                                <th class="text-center">Catatan</th>
+                                                <th class="text-center">Pengirim</th>
                                                 <th class="text-center">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($officers as $officer)
+                                            @foreach ($notes as $note)
                                                 <tr>
                                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                                    <td class="text-center">{{ $officer->name }}</td>
-                                                    <td class="text-center">{{ $officer->position }}</td>
-                                                    <td class="text-center">{{ $officer->address }}</td>
-                                                    <td class="text-center">{{ $officer->age }}</td>
-                                                    <td class="text-center">{{ $officer->contact }}</td>
+                                                    <td class="">{{ $note->name }}</td>
+                                                    <td class="text-center">{{ $note->author }}</td>
                                                     <td class="text-nowrap bd-highlight">
-                                                        <a href="/officer/{{ $officer->id }}/edit"
-                                                            class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                                                        <form action="/officer/{{ $officer->id }}" method="POST"
+                                                        <a href="/note/{{ $note->id }}/edit" class="btn btn-warning"><i
+                                                                class="fas fa-edit"></i></a>
+                                                        <form action="/note/{{ $note->id }}" method="POST"
                                                             class="d-inline">
                                                             @method('delete')
                                                             @csrf
@@ -93,16 +87,16 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Tambah Data Karyawan</h5>
+                        <h5 class="modal-title">Tambah Data Catatan</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="/officer" method="POST">
+                        <form action="/note" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="name">Nama</label>
+                                <label for="name">Catatan</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
                                     name="name" required autofocus>
                                 @error('name')
@@ -113,40 +107,10 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="position">Posisi</label>
-                                <input type="text" class="form-control @error('position') is-invalid @enderror"
-                                    id="position" name="position">
-                                @error('position')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="address">Alamat</label>
-                                <input type="text" class="form-control @error('address') is-invalid @enderror" id="address"
-                                    name="address">
-                                @error('address')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="age">Umur</label>
-                                <input type="text" class="form-control @error('age') is-invalid @enderror" id="age"
-                                    name="age">
-                                @error('age')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="contact">Kontak</label>
-                                <input type="text" class="form-control @error('contact') is-invalid @enderror" id="contact"
-                                    name="contact">
-                                @error('contact')
+                                <label for="author">Pengirim</label>
+                                <input type="text" class="form-control @error('author') is-invalid @enderror" id="author"
+                                    name="author">
+                                @error('author')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>

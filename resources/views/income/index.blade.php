@@ -59,7 +59,7 @@
                                                     {{ number_format($income->count, 2, ',', '.') }}</td>
                                                 <td class="text-center">{{ $income->incomeDetail->name }}</td>
                                                 <td class="text-center">{{ $income->created_at->format('M d Y') }}</td>
-                                                <td class="text-center">
+                                                <td class="text-nowrap bd-highlight">
                                                     <a href="/income/{{ $income->id }}/edit" class="btn btn-warning"><i
                                                             class="fas fa-edit"></i></a>
                                                     <form action="/income/{{ $income->id }}" method="POST"
